@@ -1,7 +1,8 @@
 import { useMessages, useTranslations } from "next-intl";
 import { FieldError } from "@/components/questionnaire/field-error";
+import { optionClassName } from "@/components/questionnaire/field-styles";
 import type { StepProps } from "@/components/questionnaire/step-props";
-import { businessTypeConfig, businessTypes } from "@/lib/business-types";
+import { businessTypes, exampleServicesFor, sectorPalettesFor } from "@/lib/business-types";
 import type { BusinessType } from "@/lib/generated/prisma/enums";
 
 export function TypeStep({ draft, update, errors }: StepProps) {
@@ -9,27 +10,20 @@ export function TypeStep({ draft, update, errors }: StepProps) {
   const messages = useMessages();
 
   function select(type: BusinessType) {
-    const config = businessTypeConfig[type];
     const serviceNames: Record<string, string> = messages.BusinessTypes[type].services;
     update({
       type,
-      colors: draft.colors ?? config.palettes[0],
+      colors: draft.colors ?? sectorPalettesFor(type)[0],
       services:
-        draft.services ??
-        config.exampleServices.map(({ key, ...service }) => ({ name: serviceNames[key], ...service })),
+        draft.services ?? exampleServicesFor(type).map(({ key, ...service }) => ({ name: serviceNames[key], ...service })),
     });
   }
 
   return (
-    <div className="space-y-2">
-      <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+    <div className="space-y-3">
+      <div className="flex flex-wrap gap-2.5">
         {businessTypes.map((type) => (
-          <button
-            key={type}
-            type="button"
-            onClick={() => select(type)}
-            className={`rounded border p-3 text-left ${draft.type === type ? "border-gray-900 bg-gray-100" : "border-gray-300"}`}
-          >
+          <button key={type} type="button" onClick={() => select(type)} className={optionClassName(draft.type === type)}>
             {t(`${type}.name`)}
           </button>
         ))}

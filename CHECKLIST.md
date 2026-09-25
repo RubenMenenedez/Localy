@@ -9,6 +9,7 @@ Formato: `- [ ] Qué se necesita — para qué sirve — fase — quién lo hace
 - [x] Migración inicial `20260925112807_init` aplicada en `development` — modelo de datos — Fase 1 — Claude
 - [x] Migraciones `remove_timezone_default` y `add_business_language` aplicadas en `development` — modelo de datos — Fase 1 — Claude
 - [ ] Aplicar migraciones en `production` con `prisma migrate deploy` al desplegar — base de datos de producción — Fase 1 — yo / Claude
+- [x] Migración `questionnaire_style_options` (26 tipos, objetivo, estilo, tipografías, 4 colores) aplicada en `development` — opciones del cuestionario — Fase 2 — Claude
 - [x] Migración `staff_and_business_draft` (`Staff`, `StaffService`, `StaffWorkingHours`, `Appointment.staffId` obligatorio, `Business.status`) aplicada en `development` — reservas por empleado y borradores — Fase 2 — Claude
 - [ ] Tabla de invitaciones de empleados (token con hash, email, caducidad) — vincular cuenta a un empleado — Fase 7 — Claude
 - [ ] Revisar la retención de historial / restauración en el plan de Neon — recuperación ante pérdida de datos — Fase 0 — yo
@@ -65,6 +66,11 @@ Formato: `- [ ] Qué se necesita — para qué sirve — fase — quién lo hace
 - `Business.status` solo tiene `DRAFT` por ahora; los estados de publicación se añaden en la Fase 5.
 - Precios sin moneda por ahora (el cuestionario pide un número); la moneda se decide con Stripe en la Fase 4.
 - Paletas y servicios de ejemplo por tipo en `lib/business-types.ts`; las secciones por tipo se definirán con la plantilla (Fase 3).
+- 26 tipos de negocio agrupados en sectores; 6 paletas por sector + 20 paletas generales filtrables por estilo (claras, oscuras, cálidas, frías). Cada paleta tiene 4 colores: principal, secundario, acento y fondo.
+- Nuevas preguntas del cuestionario guardadas en `Business`: objetivo (`WebsiteGoal`), estilo (`WebsiteStyle`) y tipografías (`FontPairing`). Reglas visuales de cada estilo en `lib/website-styles.ts` y tipografías en `lib/fonts.ts` (next/font, sin dependencias nuevas); las usará también la plantilla pública.
+- Migración `questionnaire_style_options`: rellena las columnas nuevas de las filas existentes y elimina los valores por defecto, para que sigan siendo obligatorias.
+- El paso de estilo fija por defecto tipografía, posición del texto (`TextAlign`) y títulos en negrita (`boldHeadings`) según el estilo elegido; el dueño puede cambiarlos en el mismo paso (ya no hay paso de tipografías). Migración `style_text_options`.
+- Vista previa en vivo (`components/questionnaire/site-preview.tsx`) en el panel derecho del cuestionario a partir del paso 3; la Fase 3 la sustituirá por la plantilla real.
 - Vitest 5.0.2 (dev) para tests de lógica crítica; `@types/node` subido a ^24 (runtime Node 24; lo exige Vitest 5).
 - Borrador del cuestionario en el navegador hasta el registro; al registrarse se guarda en BD (`Business.userId` siempre obligatorio).
 - Un usuario puede tener varios negocios (`userId` indexado, no único).

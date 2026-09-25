@@ -1,15 +1,25 @@
-import { useTranslations } from "next-intl";
-import Link from "next/link";
+import { Features } from "@/components/landing/features";
+import { FinalCta } from "@/components/landing/final-cta";
+import { Hero } from "@/components/landing/hero";
+import { HowItWorks } from "@/components/landing/how-it-works";
+import { Intro } from "@/components/landing/intro";
+import { Showcase } from "@/components/landing/showcase";
+import { SiteFooter } from "@/components/landing/site-footer";
+import { SiteHeader } from "@/components/landing/site-header";
 
 export default function Home() {
-  const t = useTranslations("HomePage");
-
   return (
-    <main className="space-y-4 p-8">
-      <h1 className="text-2xl font-semibold">{t("title")}</h1>
-      <Link href="/start" className="underline">
-        {t("start")}
-      </Link>
-    </main>
+    <>
+      <SiteHeader />
+      <main>
+        <Hero />
+        <Intro />
+        <Showcase />
+        <HowItWorks />
+        <Features />
+        <FinalCta />
+      </main>
+      <SiteFooter />
+    </>
   );
 }

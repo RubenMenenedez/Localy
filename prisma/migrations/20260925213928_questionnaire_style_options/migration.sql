@@ -1,0 +1,42 @@
+-- CreateEnum
+CREATE TYPE "WebsiteGoal" AS ENUM ('BOOKINGS', 'CONTACT', 'SHOWCASE');
+
+-- CreateEnum
+CREATE TYPE "WebsiteStyle" AS ENUM ('MINIMAL', 'BOLD', 'ELEGANT', 'PLAYFUL');
+
+-- CreateEnum
+CREATE TYPE "FontPairing" AS ENUM ('MODERN', 'CLASSIC', 'FRIENDLY', 'TECHNICAL');
+
+-- AlterEnum
+ALTER TYPE "BusinessType" ADD VALUE 'NAIL_SALON';
+ALTER TYPE "BusinessType" ADD VALUE 'SPA';
+ALTER TYPE "BusinessType" ADD VALUE 'TATTOO_STUDIO';
+ALTER TYPE "BusinessType" ADD VALUE 'DENTIST';
+ALTER TYPE "BusinessType" ADD VALUE 'PHYSIOTHERAPY';
+ALTER TYPE "BusinessType" ADD VALUE 'PSYCHOLOGIST';
+ALTER TYPE "BusinessType" ADD VALUE 'PET_GROOMING';
+ALTER TYPE "BusinessType" ADD VALUE 'CAR_WASH';
+ALTER TYPE "BusinessType" ADD VALUE 'CAFE';
+ALTER TYPE "BusinessType" ADD VALUE 'BAKERY';
+ALTER TYPE "BusinessType" ADD VALUE 'YOGA_STUDIO';
+ALTER TYPE "BusinessType" ADD VALUE 'PERSONAL_TRAINER';
+ALTER TYPE "BusinessType" ADD VALUE 'PHOTOGRAPHER';
+ALTER TYPE "BusinessType" ADD VALUE 'DRIVING_SCHOOL';
+ALTER TYPE "BusinessType" ADD VALUE 'TUTORING';
+ALTER TYPE "BusinessType" ADD VALUE 'FLORIST';
+ALTER TYPE "BusinessType" ADD VALUE 'JEWELRY';
+
+-- AlterTable: existing draft rows get neutral values; the defaults are dropped so new rows must set them.
+ALTER TABLE "Business"
+ADD COLUMN "accentColor" TEXT NOT NULL DEFAULT '#0ea5e9',
+ADD COLUMN "backgroundColor" TEXT NOT NULL DEFAULT '#ffffff',
+ADD COLUMN "fontPairing" "FontPairing" NOT NULL DEFAULT 'MODERN',
+ADD COLUMN "goal" "WebsiteGoal" NOT NULL DEFAULT 'BOOKINGS',
+ADD COLUMN "style" "WebsiteStyle" NOT NULL DEFAULT 'MINIMAL';
+
+ALTER TABLE "Business"
+ALTER COLUMN "accentColor" DROP DEFAULT,
+ALTER COLUMN "backgroundColor" DROP DEFAULT,
+ALTER COLUMN "fontPairing" DROP DEFAULT,
+ALTER COLUMN "goal" DROP DEFAULT,
+ALTER COLUMN "style" DROP DEFAULT;

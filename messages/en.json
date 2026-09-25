@@ -1,10 +1,7 @@
 {
   "Metadata": {
-    "title": "Localy"
-  },
-  "HomePage": {
     "title": "Localy",
-    "start": "Create your website"
+    "description": "Create a professional website for your local business with online bookings, in a few minutes."
   },
   "LanguageSelector": {
     "label": "Language"
@@ -20,6 +17,7 @@
     }
   },
   "Questionnaire": {
+    "exit": "Exit",
     "progress": "Step {current} of {total}",
     "back": "Back",
     "next": "Next",
@@ -29,13 +27,23 @@
         "title": "What kind of business do you have?",
         "description": "We'll suggest colors and services that fit it."
       },
-      "colors": {
-        "title": "Choose your colors",
-        "description": "Pick a suggested palette or choose your own colors.",
-        "custom": "Custom colors",
-        "primary": "Main color",
-        "secondary": "Secondary color",
-        "palette": "Palette {primary} and {secondary}"
+      "goal": {
+        "title": "What's the main goal of your website?",
+        "description": "We'll put the most important action front and center.",
+        "options": {
+          "BOOKINGS": {
+            "title": "Get bookings",
+            "text": "Customers book appointments online."
+          },
+          "CONTACT": {
+            "title": "Get contacted",
+            "text": "Customers call, write or visit you."
+          },
+          "SHOWCASE": {
+            "title": "Show my work",
+            "text": "Present your services, work and team."
+          }
+        }
       },
       "name": {
         "title": "What's your business called?",
@@ -46,6 +54,80 @@
         "title": "Describe your business",
         "description": "Tell visitors what you do and what makes you special.",
         "label": "Description"
+      },
+      "style": {
+        "title": "Choose a style",
+        "description": "Each style sets the text position, the font and whether headings are bold. You can adjust them below.",
+        "options": {
+          "MINIMAL": {
+            "title": "Minimal",
+            "text": "Clean, light and quiet."
+          },
+          "BOLD": {
+            "title": "Bold",
+            "text": "Strong headings and big contrast."
+          },
+          "ELEGANT": {
+            "title": "Elegant",
+            "text": "Refined, centered and airy."
+          },
+          "PLAYFUL": {
+            "title": "Playful",
+            "text": "Rounded shapes and a friendly feel."
+          }
+        },
+        "customize": "Adjust your style",
+        "position": {
+          "label": "Text position",
+          "LEFT": "Left",
+          "CENTER": "Centered"
+        },
+        "font": {
+          "label": "Font",
+          "options": {
+            "MODERN": {
+              "title": "Modern",
+              "text": "Clear and simple, easy to read on any screen."
+            },
+            "CLASSIC": {
+              "title": "Classic",
+              "text": "Serif headings with a timeless, editorial feel."
+            },
+            "FRIENDLY": {
+              "title": "Friendly",
+              "text": "Soft, rounded letters that feel approachable."
+            },
+            "TECHNICAL": {
+              "title": "Technical",
+              "text": "Precise, contemporary headings."
+            }
+          }
+        },
+        "bold": {
+          "label": "Bold headings",
+          "text": "Make titles heavier so they stand out more."
+        }
+      },
+      "colors": {
+        "title": "Choose your colors",
+        "description": "Choose a palette suggested for your sector, explore more by mood, or create your own with four colors.",
+        "custom": "Custom colors",
+        "palette": "Palette {primary} and {secondary}",
+        "suggested": "Suggested for your business",
+        "more": "More palettes",
+        "moods": {
+          "all": "All",
+          "light": "Light",
+          "dark": "Dark",
+          "warm": "Warm",
+          "cool": "Cool"
+        },
+        "roles": {
+          "primary": "Main",
+          "secondary": "Secondary",
+          "accent": "Accent",
+          "background": "Background"
+        }
       },
       "language": {
         "title": "Website language",
@@ -108,7 +190,10 @@
       "services": {
         "haircut": "Haircut",
         "coloring": "Hair coloring",
-        "blowDry": "Blow-dry"
+        "highlights": "Highlights",
+        "blowDry": "Blow-dry",
+        "treatment": "Hair treatment",
+        "updo": "Updo"
       }
     },
     "BARBERSHOP": {
@@ -116,15 +201,9 @@
       "services": {
         "haircut": "Haircut",
         "beardTrim": "Beard trim",
-        "haircutAndBeard": "Haircut and beard"
-      }
-    },
-    "AUTO_REPAIR": {
-      "name": "Auto repair shop",
-      "services": {
-        "oilChange": "Oil change",
-        "inspection": "Vehicle inspection",
-        "tireChange": "Tire change"
+        "haircutAndBeard": "Haircut and beard",
+        "hotTowelShave": "Hot towel shave",
+        "kidsCut": "Kids' haircut"
       }
     },
     "BEAUTY_CENTER": {
@@ -132,7 +211,40 @@
       "services": {
         "facial": "Facial treatment",
         "manicure": "Manicure",
-        "waxing": "Waxing"
+        "waxing": "Waxing",
+        "massage": "Massage",
+        "eyebrows": "Eyebrow shaping",
+        "makeup": "Makeup"
+      }
+    },
+    "NAIL_SALON": {
+      "name": "Nail salon",
+      "services": {
+        "manicure": "Manicure",
+        "gelManicure": "Gel manicure",
+        "pedicure": "Pedicure",
+        "nailArt": "Nail art",
+        "acrylics": "Acrylic nails"
+      }
+    },
+    "SPA": {
+      "name": "Spa",
+      "services": {
+        "relaxingMassage": "Relaxing massage",
+        "hotStones": "Hot stone massage",
+        "facial": "Facial treatment",
+        "bodyScrub": "Body scrub",
+        "spaCircuit": "Spa circuit"
+      }
+    },
+    "TATTOO_STUDIO": {
+      "name": "Tattoo studio",
+      "services": {
+        "consultation": "Design consultation",
+        "smallTattoo": "Small tattoo",
+        "mediumTattoo": "Medium tattoo",
+        "touchUp": "Touch-up",
+        "piercing": "Piercing"
       }
     },
     "CLINIC": {
@@ -140,7 +252,39 @@
       "services": {
         "consultation": "Consultation",
         "followUp": "Follow-up visit",
-        "checkup": "Full check-up"
+        "checkup": "Full check-up",
+        "bloodTest": "Blood test",
+        "videoConsultation": "Video consultation"
+      }
+    },
+    "DENTIST": {
+      "name": "Dental clinic",
+      "services": {
+        "checkup": "Dental check-up",
+        "cleaning": "Dental cleaning",
+        "filling": "Filling",
+        "whitening": "Teeth whitening",
+        "orthodonticsConsultation": "Orthodontics consultation"
+      }
+    },
+    "PHYSIOTHERAPY": {
+      "name": "Physiotherapy",
+      "services": {
+        "assessment": "Initial assessment",
+        "session": "Physiotherapy session",
+        "sportsMassage": "Sports massage",
+        "dryNeedling": "Dry needling",
+        "rehabilitation": "Rehabilitation"
+      }
+    },
+    "PSYCHOLOGIST": {
+      "name": "Psychologist",
+      "services": {
+        "firstSession": "First session",
+        "individualTherapy": "Individual therapy",
+        "coupleTherapy": "Couples therapy",
+        "onlineSession": "Online session",
+        "childTherapy": "Child therapy"
       }
     },
     "VETERINARY": {
@@ -148,7 +292,41 @@
       "services": {
         "consultation": "Consultation",
         "vaccination": "Vaccination",
+        "checkup": "Check-up",
+        "microchip": "Microchip",
+        "dentalCleaning": "Dental cleaning",
         "grooming": "Grooming"
+      }
+    },
+    "PET_GROOMING": {
+      "name": "Pet grooming",
+      "services": {
+        "bathSmall": "Bath (small dog)",
+        "bathLarge": "Bath (large dog)",
+        "fullGrooming": "Full grooming",
+        "nailTrim": "Nail trim",
+        "deshedding": "De-shedding"
+      }
+    },
+    "AUTO_REPAIR": {
+      "name": "Auto repair shop",
+      "services": {
+        "oilChange": "Oil change",
+        "inspection": "Vehicle inspection",
+        "tireChange": "Tire change",
+        "brakes": "Brake service",
+        "diagnostics": "Diagnostics",
+        "airConditioning": "Air conditioning"
+      }
+    },
+    "CAR_WASH": {
+      "name": "Car wash",
+      "services": {
+        "exteriorWash": "Exterior wash",
+        "interiorCleaning": "Interior cleaning",
+        "fullDetail": "Full detailing",
+        "waxPolish": "Wax and polish",
+        "upholstery": "Upholstery cleaning"
       }
     },
     "RESTAURANT": {
@@ -156,7 +334,29 @@
       "services": {
         "tableForTwo": "Table for two",
         "tableForFour": "Table for four",
-        "tastingMenu": "Tasting menu"
+        "largeGroup": "Large group",
+        "tastingMenu": "Tasting menu",
+        "privateDinner": "Private dinner"
+      }
+    },
+    "CAFE": {
+      "name": "Café",
+      "services": {
+        "tableReservation": "Table reservation",
+        "brunch": "Brunch",
+        "afternoonTea": "Afternoon tea",
+        "baristaWorkshop": "Barista workshop",
+        "privateEvent": "Private event"
+      }
+    },
+    "BAKERY": {
+      "name": "Bakery",
+      "services": {
+        "cakeOrder": "Cake order",
+        "celebrationCake": "Celebration cake",
+        "breadWorkshop": "Bread-making workshop",
+        "pickupOrder": "Order pickup",
+        "tasting": "Tasting"
       }
     },
     "GYM": {
@@ -164,16 +364,193 @@
       "services": {
         "personalTraining": "Personal training",
         "trialClass": "Trial class",
-        "nutritionConsultation": "Nutrition consultation"
+        "nutritionConsultation": "Nutrition consultation",
+        "groupClass": "Group class",
+        "bodyAssessment": "Body assessment"
+      }
+    },
+    "YOGA_STUDIO": {
+      "name": "Yoga and pilates studio",
+      "services": {
+        "yogaClass": "Yoga class",
+        "pilatesClass": "Pilates class",
+        "privateSession": "Private session",
+        "meditation": "Meditation",
+        "beginnersClass": "Beginners' class"
+      }
+    },
+    "PERSONAL_TRAINER": {
+      "name": "Personal trainer",
+      "services": {
+        "firstSession": "First session",
+        "trainingSession": "Training session",
+        "couplesSession": "Session for two",
+        "onlineSession": "Online session",
+        "trainingPlan": "Training plan"
+      }
+    },
+    "PHOTOGRAPHER": {
+      "name": "Photographer",
+      "services": {
+        "portraitSession": "Portrait session",
+        "familySession": "Family session",
+        "productPhotos": "Product photography",
+        "eventCoverage": "Event coverage",
+        "headshots": "Professional headshots"
+      }
+    },
+    "DRIVING_SCHOOL": {
+      "name": "Driving school",
+      "services": {
+        "drivingLesson": "Driving lesson",
+        "theoryClass": "Theory class",
+        "motorbikeLesson": "Motorbike lesson",
+        "examPrep": "Exam preparation",
+        "refresherLesson": "Refresher lesson"
+      }
+    },
+    "TUTORING": {
+      "name": "Tutoring and academy",
+      "services": {
+        "privateClass": "Private class",
+        "groupClass": "Group class",
+        "examPrep": "Exam preparation",
+        "languageClass": "Language class",
+        "trialClass": "Trial class"
+      }
+    },
+    "FLORIST": {
+      "name": "Florist",
+      "services": {
+        "bouquetOrder": "Bouquet order",
+        "weddingConsultation": "Wedding consultation",
+        "eventFlowers": "Event flowers",
+        "workshop": "Flower workshop",
+        "plantCare": "Plant care"
+      }
+    },
+    "JEWELRY": {
+      "name": "Jewelry store",
+      "services": {
+        "privateAppointment": "Private appointment",
+        "engagementRings": "Engagement rings",
+        "repair": "Jewelry repair",
+        "resizing": "Ring resizing",
+        "customDesign": "Custom design"
       }
     },
     "OTHER": {
       "name": "Other",
       "services": {
         "consultation": "Consultation",
-        "standardService": "Standard service"
+        "standardService": "Standard service",
+        "premiumService": "Premium service",
+        "followUp": "Follow-up",
+        "onlineSession": "Online session"
       }
     }
+  },
+  "Landing": {
+    "brand": "Localy",
+    "nav": {
+      "signIn": "Sign in",
+      "getStarted": "Get started"
+    },
+    "hero": {
+      "eyebrow": "Websites for local businesses",
+      "title": "Your business online, with bookings built in",
+      "subtitle": "Answer a few simple questions and get a professional website where your customers can see your services, check your opening hours and book appointments.",
+      "slide": "Show photo {number}"
+    },
+    "howItWorks": {
+      "title": "From questionnaire to website in three steps",
+      "steps": {
+        "answer": {
+          "title": "Answer the questionnaire",
+          "text": "Tell us about your business: services, prices, opening hours and contact details."
+        },
+        "publish": {
+          "title": "Publish your website",
+          "text": "Your website goes live on its own address, with your colors and your content."
+        },
+        "manage": {
+          "title": "Manage it from your dashboard",
+          "text": "Confirm appointments, read messages and update your website whenever you need."
+        }
+      }
+    },
+    "features": {
+      "title": "Everything a local business needs",
+      "items": {
+        "booking": {
+          "title": "Online appointments",
+          "text": "Customers choose a service, a day and a free time slot. No phone calls and no double bookings."
+        },
+        "staff": {
+          "title": "Your team",
+          "text": "Add staff with their own services and hours, so customers can choose who they book with."
+        },
+        "messages": {
+          "title": "Contact form",
+          "text": "Messages sent from your website arrive directly in your dashboard."
+        },
+        "languages": {
+          "title": "In your customers' language",
+          "text": "Choose the language your website is shown in."
+        },
+        "design": {
+          "title": "Designed for your sector",
+          "text": "Color palettes and example services suited to your type of business."
+        },
+        "hosting": {
+          "title": "Hosting included",
+          "text": "We host and maintain your website for a one-time setup fee and a simple monthly subscription."
+        }
+      }
+    },
+    "cta": {
+      "title": "Create your website today",
+      "text": "It only takes a few minutes. Your progress is saved, so you can come back whenever you want.",
+      "button": "Create your website"
+    },
+    "footer": "© {year} Localy",
+    "intro": {
+      "text": "A website that looks as good as your business, with appointments, your team and your messages in one place."
+    },
+    "showcase": {
+      "title": "Made for businesses like yours",
+      "text": "Designs and suggestions adapted to each sector, from clinics and workshops to shops and studios.",
+      "captions": {
+        "jewelry": "Jewelry store",
+        "veterinary": "Veterinary clinic",
+        "florist": "Florist",
+        "barbershop": "Barbershop"
+      }
+    },
+    "images": {
+      "jewelry": "Hands wearing rings and bracelets on a dark surface",
+      "veterinary": "A veterinarian holding a cat in a clinic",
+      "florist": "A bouquet of white lilies and roses",
+      "barbershop": "A vintage leather barber chair"
+    }
+  },
+  "Preview": {
+    "label": "Live preview",
+    "namePlaceholder": "Your business",
+    "descriptionPlaceholder": "Your description will appear here.",
+    "nav": {
+      "services": "Services",
+      "hours": "Hours",
+      "contact": "Contact"
+    },
+    "cta": {
+      "BOOKINGS": "Book an appointment",
+      "CONTACT": "Contact us",
+      "SHOWCASE": "See our work"
+    },
+    "services": "Services",
+    "noServices": "Your services will appear here.",
+    "duration": "{minutes} min"
   },
   "auth": {
     "APP": "App",

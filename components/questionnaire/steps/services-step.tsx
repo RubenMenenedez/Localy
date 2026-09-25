@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { FieldError } from "@/components/questionnaire/field-error";
+import { inputClassName, labelClassName, secondaryButtonClassName } from "@/components/questionnaire/field-styles";
 import type { StepProps } from "@/components/questionnaire/step-props";
 import type { BusinessDraft } from "@/lib/questionnaire/schema";
 
@@ -18,56 +19,57 @@ export function ServicesStep({ draft, update, errors }: StepProps) {
   return (
     <div className="space-y-4">
       {services.map((service, index) => (
-        <fieldset key={index} className="grid gap-2 rounded border p-3 sm:grid-cols-[1fr_8rem_8rem_auto] sm:items-start">
-          <label className="space-y-1">
-            <span className="text-sm">{t("name")}</span>
+        <fieldset key={index} className="space-y-3 border-b border-neutral-200 pb-5">
+          <label className="block space-y-2">
+            <span className={labelClassName}>{t("name")}</span>
             <input
-              className="w-full rounded border px-2 py-1"
+              className={inputClassName}
               value={service.name}
               maxLength={80}
               onChange={(event) => change(index, { name: event.target.value })}
             />
             <FieldError error={errors[`services.${index}.name`]} />
           </label>
-          <label className="space-y-1">
-            <span className="text-sm">{t("price")}</span>
-            <input
-              className="w-full rounded border px-2 py-1"
-              type="number"
-              min={0}
-              step="0.01"
-              value={Number.isFinite(service.priceCents) ? service.priceCents / 100 : ""}
-              onChange={(event) =>
-                change(index, { priceCents: event.target.value === "" ? NaN : Math.round(Number(event.target.value) * 100) })
-              }
-            />
-            <FieldError error={errors[`services.${index}.priceCents`]} />
-          </label>
-          <label className="space-y-1">
-            <span className="text-sm">{t("duration")}</span>
-            <input
-              className="w-full rounded border px-2 py-1"
-              type="number"
-              min={5}
-              max={480}
-              step={5}
-              value={Number.isFinite(service.durationMinutes) ? service.durationMinutes : ""}
-              onChange={(event) =>
-                change(index, { durationMinutes: event.target.value === "" ? NaN : Number(event.target.value) })
-              }
-            />
-            <FieldError error={errors[`services.${index}.durationMinutes`]} />
-          </label>
-          <button
-            type="button"
-            className="text-sm text-red-700 underline sm:mt-6"
-            onClick={() => update({ services: services.filter((_, i) => i !== index) })}
-          >
-            {t("remove")}
-          </button>
+          <div className="grid grid-cols-[1fr_1fr_auto] items-end gap-3">
+            <label className="space-y-2">
+              <span className={labelClassName}>{t("price")}</span>
+              <input
+                className={inputClassName}
+                type="number"
+                min={0}
+                step="0.01"
+                value={Number.isFinite(service.priceCents) ? service.priceCents / 100 : ""}
+                onChange={(event) =>
+                  change(index, { priceCents: event.target.value === "" ? NaN : Math.round(Number(event.target.value) * 100) })
+                }
+              />
+            </label>
+            <label className="space-y-2">
+              <span className={labelClassName}>{t("duration")}</span>
+              <input
+                className={inputClassName}
+                type="number"
+                min={5}
+                max={480}
+                step={5}
+                value={Number.isFinite(service.durationMinutes) ? service.durationMinutes : ""}
+                onChange={(event) =>
+                  change(index, { durationMinutes: event.target.value === "" ? NaN : Number(event.target.value) })
+                }
+              />
+            </label>
+            <button
+              type="button"
+              className="pb-3 text-sm text-neutral-500 underline-offset-4 hover:text-neutral-900 hover:underline"
+              onClick={() => update({ services: services.filter((_, i) => i !== index) })}
+            >
+              {t("remove")}
+            </button>
+          </div>
+          <FieldError error={errors[`services.${index}.priceCents`] ?? errors[`services.${index}.durationMinutes`]} />
         </fieldset>
       ))}
-      <button type="button" className="rounded border px-3 py-1" onClick={() => update({ services: [...services, NEW_SERVICE] })}>
+      <button type="button" className={secondaryButtonClassName} onClick={() => update({ services: [...services, NEW_SERVICE] })}>
         {t("add")}
       </button>
       <FieldError error={errors.services} />

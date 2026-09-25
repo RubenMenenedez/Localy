@@ -1,7 +1,8 @@
 import { z } from "zod";
 import type { PartialBusinessDraft } from "@/lib/questionnaire/schema";
 
-const STORAGE_KEY = "localy.questionnaire.v1";
+// Bump the version when the draft shape or step order changes, so old drafts aren't loaded into the wrong steps.
+const STORAGE_KEY = "localy.questionnaire.v3";
 
 // Step data is only loosely checked here; each step is validated before moving on and the whole draft before saving.
 const storedDraftSchema = z.object({

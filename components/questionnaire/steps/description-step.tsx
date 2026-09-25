@@ -1,15 +1,16 @@
 import { useTranslations } from "next-intl";
 import { FieldError } from "@/components/questionnaire/field-error";
+import { inputClassName, labelClassName } from "@/components/questionnaire/field-styles";
 import type { StepProps } from "@/components/questionnaire/step-props";
 
 export function DescriptionStep({ draft, update, errors }: StepProps) {
   const t = useTranslations("Questionnaire.steps.description");
 
   return (
-    <label className="block space-y-1">
-      <span className="text-sm font-medium">{t("label")}</span>
+    <label className="block space-y-2">
+      <span className={labelClassName}>{t("label")}</span>
       <textarea
-        className="w-full rounded border px-3 py-2"
+        className={inputClassName}
         rows={6}
         maxLength={1000}
         value={draft.description ?? ""}

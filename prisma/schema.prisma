@@ -10,13 +10,55 @@ datasource db {
 enum BusinessType {
   HAIR_SALON
   BARBERSHOP
-  AUTO_REPAIR
   BEAUTY_CENTER
+  NAIL_SALON
+  SPA
+  TATTOO_STUDIO
   CLINIC
+  DENTIST
+  PHYSIOTHERAPY
+  PSYCHOLOGIST
   VETERINARY
+  PET_GROOMING
+  AUTO_REPAIR
+  CAR_WASH
   RESTAURANT
+  CAFE
+  BAKERY
   GYM
+  YOGA_STUDIO
+  PERSONAL_TRAINER
+  PHOTOGRAPHER
+  DRIVING_SCHOOL
+  TUTORING
+  FLORIST
+  JEWELRY
   OTHER
+}
+
+enum WebsiteGoal {
+  BOOKINGS
+  CONTACT
+  SHOWCASE
+}
+
+enum WebsiteStyle {
+  MINIMAL
+  BOLD
+  ELEGANT
+  PLAYFUL
+}
+
+enum TextAlign {
+  LEFT
+  CENTER
+}
+
+enum FontPairing {
+  MODERN
+  CLASSIC
+  FRIENDLY
+  TECHNICAL
 }
 
 enum BusinessStatus {
@@ -42,27 +84,34 @@ enum SubscriptionStatus {
 }
 
 model Business {
-  id             String         @id @default(cuid())
+  id              String         @id @default(cuid())
   // References neon_auth.user.id; no FK because that schema is managed by Neon Auth. Ownership is checked in /lib.
-  userId         String         @db.Uuid
-  type           BusinessType
-  status         BusinessStatus @default(DRAFT)
-  slug           String?        @unique
-  name           String
-  description    String
-  primaryColor   String
-  secondaryColor String
-  phone          String?
-  email          String
-  address        String?
-  logoUrl        String?
-  imageUrls      String[]
+  userId          String         @db.Uuid
+  type            BusinessType
+  status          BusinessStatus @default(DRAFT)
+  slug            String?        @unique
+  name            String
+  description     String
+  goal            WebsiteGoal
+  style           WebsiteStyle
+  fontPairing     FontPairing
+  textAlign       TextAlign
+  boldHeadings    Boolean
+  primaryColor    String
+  secondaryColor  String
+  accentColor     String
+  backgroundColor String
+  phone           String?
+  email           String
+  address         String?
+  logoUrl         String?
+  imageUrls       String[]
   // IANA zone (e.g. "America/New_York"), detected from the owner's device in the questionnaire.
-  timezone       String
+  timezone        String
   // Public website language, chosen by the owner; one of the locales in lib/i18n/config.ts.
-  language       String
-  createdAt      DateTime       @default(now())
-  updatedAt      DateTime       @updatedAt
+  language        String
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
 
   services     Service[]
   openingHours OpeningHours[]

@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { FieldError } from "@/components/questionnaire/field-error";
+import { inputClassName, labelClassName } from "@/components/questionnaire/field-styles";
 import type { StepProps } from "@/components/questionnaire/step-props";
 
 const FIELDS = [
@@ -12,12 +13,12 @@ export function ContactStep({ draft, update, errors }: StepProps) {
   const t = useTranslations("Questionnaire.steps.contact");
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-5">
       {FIELDS.map(({ key, type, maxLength }) => (
-        <label key={key} className="block space-y-1">
-          <span className="text-sm font-medium">{t(key)}</span>
+        <label key={key} className="block space-y-2">
+          <span className={labelClassName}>{t(key)}</span>
           <input
-            className="w-full rounded border px-3 py-2"
+            className={inputClassName}
             type={type}
             maxLength={maxLength}
             value={draft[key] ?? ""}

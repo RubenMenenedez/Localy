@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { BusinessType } from "@/lib/generated/prisma/enums";
+import { BusinessType, FontPairing, TextAlign, WebsiteGoal, WebsiteStyle } from "@/lib/generated/prisma/enums";
 import { localeSchema } from "@/lib/i18n/config";
 
 // Every `error` below is a key in messages: Questionnaire.errors.<key>
@@ -58,9 +58,21 @@ const openingHoursSchema = z
 
 export const stepSchemas = {
   type: z.object({ type: z.enum(BusinessType, { error: "required" }) }),
-  colors: z.object({ colors: z.object({ primary: hexColor, secondary: hexColor }, { error: "required" }) }),
+  goal: z.object({ goal: z.enum(WebsiteGoal, { error: "required" }) }),
   name: z.object({ name: requiredText(80) }),
   description: z.object({ description: requiredText(1000) }),
+  style: z.object({
+    style: z.enum(WebsiteStyle, { error: "required" }),
+    fontPairing: z.enum(FontPairing, { error: "required" }),
+    textAlign: z.enum(TextAlign, { error: "required" }),
+    boldHeadings: z.boolean({ error: "required" }),
+  }),
+  colors: z.object({
+    colors: z.object(
+      { primary: hexColor, secondary: hexColor, accent: hexColor, background: hexColor },
+      { error: "required" },
+    ),
+  }),
   language: z.object({ language: localeSchema }),
   services: z.object({ services: z.array(serviceSchema).min(1, { error: "servicesRequired" }) }),
   hours: z.object({ openingHours: openingHoursSchema }),
@@ -78,9 +90,11 @@ export const stepIds = Object.keys(stepSchemas) as StepId[];
 
 export const businessDraftSchema = z.object({
   ...stepSchemas.type.shape,
-  ...stepSchemas.colors.shape,
+  ...stepSchemas.goal.shape,
   ...stepSchemas.name.shape,
   ...stepSchemas.description.shape,
+  ...stepSchemas.style.shape,
+  ...stepSchemas.colors.shape,
   ...stepSchemas.language.shape,
   ...stepSchemas.services.shape,
   ...stepSchemas.hours.shape,
@@ -90,5 +104,5 @@ export const businessDraftSchema = z.object({
 
 export type BusinessDraft = z.infer<typeof businessDraftSchema>;
 
-// What is stored in the browser while the questionnaire is in progress; the Phase 3 preview reads this shape.
+// What is stored in the browser while the questionnaire is in progress; the live preview reads this shape.
 export type PartialBusinessDraft = Partial<BusinessDraft>;

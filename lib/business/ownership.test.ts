@@ -35,7 +35,12 @@ const { submitDraft } = await import("@/lib/questionnaire/actions");
 
 const draft: BusinessDraft = {
   type: "HAIR_SALON",
-  colors: { primary: "#9d174d", secondary: "#fce7f3" },
+  goal: "BOOKINGS",
+  style: "MINIMAL",
+  fontPairing: "MODERN",
+  textAlign: "LEFT",
+  boldHeadings: false,
+  colors: { primary: "#1f2937", secondary: "#111827", accent: "#38bdf8", background: "#ffffff" },
   name: "Salon",
   description: "Haircuts and color",
   language: "en",

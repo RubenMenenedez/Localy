@@ -1,10 +1,7 @@
 {
   "Metadata": {
-    "title": "Localy"
-  },
-  "HomePage": {
     "title": "Localy",
-    "start": "Crea tu web"
+    "description": "Crea una web profesional para tu negocio local con reservas online en pocos minutos."
   },
   "LanguageSelector": {
     "label": "Idioma"
@@ -20,6 +17,7 @@
     }
   },
   "Questionnaire": {
+    "exit": "Salir",
     "progress": "Paso {current} de {total}",
     "back": "Atrás",
     "next": "Siguiente",
@@ -29,13 +27,23 @@
         "title": "¿Qué tipo de negocio tienes?",
         "description": "Te sugeriremos colores y servicios adecuados."
       },
-      "colors": {
-        "title": "Elige tus colores",
-        "description": "Elige una paleta sugerida o tus propios colores.",
-        "custom": "Colores personalizados",
-        "primary": "Color principal",
-        "secondary": "Color secundario",
-        "palette": "Paleta {primary} y {secondary}"
+      "goal": {
+        "title": "¿Cuál es el objetivo principal de tu web?",
+        "description": "Destacaremos la acción más importante.",
+        "options": {
+          "BOOKINGS": {
+            "title": "Conseguir reservas",
+            "text": "Tus clientes reservan cita online."
+          },
+          "CONTACT": {
+            "title": "Que me contacten",
+            "text": "Tus clientes te llaman, te escriben o te visitan."
+          },
+          "SHOWCASE": {
+            "title": "Mostrar mi trabajo",
+            "text": "Presenta tus servicios, tu trabajo y tu equipo."
+          }
+        }
       },
       "name": {
         "title": "¿Cómo se llama tu negocio?",
@@ -46,6 +54,80 @@
         "title": "Describe tu negocio",
         "description": "Cuenta a tus visitantes a qué te dedicas y qué te hace especial.",
         "label": "Descripción"
+      },
+      "style": {
+        "title": "Elige un estilo",
+        "description": "Cada estilo define la posición del texto, la tipografía y si los títulos van en negrita. Puedes ajustarlos abajo.",
+        "options": {
+          "MINIMAL": {
+            "title": "Minimalista",
+            "text": "Limpio, ligero y sereno."
+          },
+          "BOLD": {
+            "title": "Contundente",
+            "text": "Títulos fuertes y mucho contraste."
+          },
+          "ELEGANT": {
+            "title": "Elegante",
+            "text": "Refinado, centrado y con aire."
+          },
+          "PLAYFUL": {
+            "title": "Desenfadado",
+            "text": "Formas redondeadas y un aire cercano."
+          }
+        },
+        "customize": "Ajusta tu estilo",
+        "position": {
+          "label": "Posición del texto",
+          "LEFT": "Izquierda",
+          "CENTER": "Centrado"
+        },
+        "font": {
+          "label": "Tipografía",
+          "options": {
+            "MODERN": {
+              "title": "Moderna",
+              "text": "Clara y sencilla, fácil de leer en cualquier pantalla."
+            },
+            "CLASSIC": {
+              "title": "Clásica",
+              "text": "Títulos con serifa y un aire editorial atemporal."
+            },
+            "FRIENDLY": {
+              "title": "Cercana",
+              "text": "Letras suaves y redondeadas que transmiten cercanía."
+            },
+            "TECHNICAL": {
+              "title": "Técnica",
+              "text": "Títulos precisos y contemporáneos."
+            }
+          }
+        },
+        "bold": {
+          "label": "Títulos en negrita",
+          "text": "Títulos más gruesos para que destaquen más."
+        }
+      },
+      "colors": {
+        "title": "Elige tus colores",
+        "description": "Elige una paleta sugerida para tu sector, explora más por estilo o crea la tuya con cuatro colores.",
+        "custom": "Colores personalizados",
+        "palette": "Paleta {primary} y {secondary}",
+        "suggested": "Sugeridas para tu negocio",
+        "more": "Más paletas",
+        "moods": {
+          "all": "Todas",
+          "light": "Claras",
+          "dark": "Oscuras",
+          "warm": "Cálidas",
+          "cool": "Frías"
+        },
+        "roles": {
+          "primary": "Principal",
+          "secondary": "Secundario",
+          "accent": "Acento",
+          "background": "Fondo"
+        }
       },
       "language": {
         "title": "Idioma de la web",
@@ -108,7 +190,10 @@
       "services": {
         "haircut": "Corte de pelo",
         "coloring": "Tinte",
-        "blowDry": "Secado y peinado"
+        "highlights": "Mechas",
+        "blowDry": "Secado y peinado",
+        "treatment": "Tratamiento capilar",
+        "updo": "Recogido"
       }
     },
     "BARBERSHOP": {
@@ -116,15 +201,9 @@
       "services": {
         "haircut": "Corte de pelo",
         "beardTrim": "Arreglo de barba",
-        "haircutAndBeard": "Corte y barba"
-      }
-    },
-    "AUTO_REPAIR": {
-      "name": "Taller mecánico",
-      "services": {
-        "oilChange": "Cambio de aceite",
-        "inspection": "Revisión del vehículo",
-        "tireChange": "Cambio de neumáticos"
+        "haircutAndBeard": "Corte y barba",
+        "hotTowelShave": "Afeitado con toalla caliente",
+        "kidsCut": "Corte infantil"
       }
     },
     "BEAUTY_CENTER": {
@@ -132,7 +211,40 @@
       "services": {
         "facial": "Tratamiento facial",
         "manicure": "Manicura",
-        "waxing": "Depilación"
+        "waxing": "Depilación",
+        "massage": "Masaje",
+        "eyebrows": "Diseño de cejas",
+        "makeup": "Maquillaje"
+      }
+    },
+    "NAIL_SALON": {
+      "name": "Salón de uñas",
+      "services": {
+        "manicure": "Manicura",
+        "gelManicure": "Manicura semipermanente",
+        "pedicure": "Pedicura",
+        "nailArt": "Decoración de uñas",
+        "acrylics": "Uñas acrílicas"
+      }
+    },
+    "SPA": {
+      "name": "Spa",
+      "services": {
+        "relaxingMassage": "Masaje relajante",
+        "hotStones": "Masaje con piedras calientes",
+        "facial": "Tratamiento facial",
+        "bodyScrub": "Exfoliación corporal",
+        "spaCircuit": "Circuito spa"
+      }
+    },
+    "TATTOO_STUDIO": {
+      "name": "Estudio de tatuajes",
+      "services": {
+        "consultation": "Consulta de diseño",
+        "smallTattoo": "Tatuaje pequeño",
+        "mediumTattoo": "Tatuaje mediano",
+        "touchUp": "Retoque",
+        "piercing": "Piercing"
       }
     },
     "CLINIC": {
@@ -140,7 +252,39 @@
       "services": {
         "consultation": "Consulta",
         "followUp": "Revisión",
-        "checkup": "Chequeo completo"
+        "checkup": "Chequeo completo",
+        "bloodTest": "Análisis de sangre",
+        "videoConsultation": "Videoconsulta"
+      }
+    },
+    "DENTIST": {
+      "name": "Clínica dental",
+      "services": {
+        "checkup": "Revisión dental",
+        "cleaning": "Limpieza dental",
+        "filling": "Empaste",
+        "whitening": "Blanqueamiento dental",
+        "orthodonticsConsultation": "Consulta de ortodoncia"
+      }
+    },
+    "PHYSIOTHERAPY": {
+      "name": "Fisioterapia",
+      "services": {
+        "assessment": "Valoración inicial",
+        "session": "Sesión de fisioterapia",
+        "sportsMassage": "Masaje deportivo",
+        "dryNeedling": "Punción seca",
+        "rehabilitation": "Rehabilitación"
+      }
+    },
+    "PSYCHOLOGIST": {
+      "name": "Psicología",
+      "services": {
+        "firstSession": "Primera sesión",
+        "individualTherapy": "Terapia individual",
+        "coupleTherapy": "Terapia de pareja",
+        "onlineSession": "Sesión online",
+        "childTherapy": "Terapia infantil"
       }
     },
     "VETERINARY": {
@@ -148,7 +292,41 @@
       "services": {
         "consultation": "Consulta",
         "vaccination": "Vacunación",
+        "checkup": "Revisión",
+        "microchip": "Microchip",
+        "dentalCleaning": "Limpieza dental",
         "grooming": "Peluquería canina"
+      }
+    },
+    "PET_GROOMING": {
+      "name": "Peluquería canina",
+      "services": {
+        "bathSmall": "Baño (perro pequeño)",
+        "bathLarge": "Baño (perro grande)",
+        "fullGrooming": "Arreglo completo",
+        "nailTrim": "Corte de uñas",
+        "deshedding": "Deslanado"
+      }
+    },
+    "AUTO_REPAIR": {
+      "name": "Taller mecánico",
+      "services": {
+        "oilChange": "Cambio de aceite",
+        "inspection": "Revisión del vehículo",
+        "tireChange": "Cambio de neumáticos",
+        "brakes": "Revisión de frenos",
+        "diagnostics": "Diagnosis",
+        "airConditioning": "Aire acondicionado"
+      }
+    },
+    "CAR_WASH": {
+      "name": "Lavado de coches",
+      "services": {
+        "exteriorWash": "Lavado exterior",
+        "interiorCleaning": "Limpieza interior",
+        "fullDetail": "Detallado completo",
+        "waxPolish": "Encerado y pulido",
+        "upholstery": "Limpieza de tapicería"
       }
     },
     "RESTAURANT": {
@@ -156,7 +334,29 @@
       "services": {
         "tableForTwo": "Mesa para dos",
         "tableForFour": "Mesa para cuatro",
-        "tastingMenu": "Menú degustación"
+        "largeGroup": "Grupo grande",
+        "tastingMenu": "Menú degustación",
+        "privateDinner": "Cena privada"
+      }
+    },
+    "CAFE": {
+      "name": "Cafetería",
+      "services": {
+        "tableReservation": "Reserva de mesa",
+        "brunch": "Brunch",
+        "afternoonTea": "Merienda",
+        "baristaWorkshop": "Taller de barista",
+        "privateEvent": "Evento privado"
+      }
+    },
+    "BAKERY": {
+      "name": "Panadería y pastelería",
+      "services": {
+        "cakeOrder": "Encargo de tarta",
+        "celebrationCake": "Tarta de celebración",
+        "breadWorkshop": "Taller de pan",
+        "pickupOrder": "Recogida de pedido",
+        "tasting": "Degustación"
       }
     },
     "GYM": {
@@ -164,16 +364,193 @@
       "services": {
         "personalTraining": "Entrenamiento personal",
         "trialClass": "Clase de prueba",
-        "nutritionConsultation": "Consulta de nutrición"
+        "nutritionConsultation": "Consulta de nutrición",
+        "groupClass": "Clase colectiva",
+        "bodyAssessment": "Valoración corporal"
+      }
+    },
+    "YOGA_STUDIO": {
+      "name": "Estudio de yoga y pilates",
+      "services": {
+        "yogaClass": "Clase de yoga",
+        "pilatesClass": "Clase de pilates",
+        "privateSession": "Sesión privada",
+        "meditation": "Meditación",
+        "beginnersClass": "Clase para principiantes"
+      }
+    },
+    "PERSONAL_TRAINER": {
+      "name": "Entrenador personal",
+      "services": {
+        "firstSession": "Primera sesión",
+        "trainingSession": "Sesión de entrenamiento",
+        "couplesSession": "Sesión en pareja",
+        "onlineSession": "Sesión online",
+        "trainingPlan": "Plan de entrenamiento"
+      }
+    },
+    "PHOTOGRAPHER": {
+      "name": "Fotógrafo",
+      "services": {
+        "portraitSession": "Sesión de retrato",
+        "familySession": "Sesión familiar",
+        "productPhotos": "Fotografía de producto",
+        "eventCoverage": "Cobertura de eventos",
+        "headshots": "Retratos profesionales"
+      }
+    },
+    "DRIVING_SCHOOL": {
+      "name": "Autoescuela",
+      "services": {
+        "drivingLesson": "Clase práctica",
+        "theoryClass": "Clase teórica",
+        "motorbikeLesson": "Clase de moto",
+        "examPrep": "Preparación de examen",
+        "refresherLesson": "Clase de reciclaje"
+      }
+    },
+    "TUTORING": {
+      "name": "Academia y clases particulares",
+      "services": {
+        "privateClass": "Clase particular",
+        "groupClass": "Clase en grupo",
+        "examPrep": "Preparación de exámenes",
+        "languageClass": "Clase de idiomas",
+        "trialClass": "Clase de prueba"
+      }
+    },
+    "FLORIST": {
+      "name": "Floristería",
+      "services": {
+        "bouquetOrder": "Encargo de ramo",
+        "weddingConsultation": "Consulta para bodas",
+        "eventFlowers": "Flores para eventos",
+        "workshop": "Taller floral",
+        "plantCare": "Cuidado de plantas"
+      }
+    },
+    "JEWELRY": {
+      "name": "Joyería",
+      "services": {
+        "privateAppointment": "Cita privada",
+        "engagementRings": "Anillos de compromiso",
+        "repair": "Reparación de joyas",
+        "resizing": "Ajuste de talla",
+        "customDesign": "Diseño a medida"
       }
     },
     "OTHER": {
       "name": "Otro",
       "services": {
         "consultation": "Consulta",
-        "standardService": "Servicio estándar"
+        "standardService": "Servicio estándar",
+        "premiumService": "Servicio premium",
+        "followUp": "Seguimiento",
+        "onlineSession": "Sesión online"
       }
     }
+  },
+  "Landing": {
+    "brand": "Localy",
+    "nav": {
+      "signIn": "Iniciar sesión",
+      "getStarted": "Empezar"
+    },
+    "hero": {
+      "eyebrow": "Webs para negocios locales",
+      "title": "Tu negocio en internet, con reservas incluidas",
+      "subtitle": "Responde unas preguntas sencillas y consigue una web profesional donde tus clientes pueden ver tus servicios, consultar tu horario y reservar cita.",
+      "slide": "Mostrar foto {number}"
+    },
+    "howItWorks": {
+      "title": "Del cuestionario a tu web en tres pasos",
+      "steps": {
+        "answer": {
+          "title": "Responde el cuestionario",
+          "text": "Cuéntanos sobre tu negocio: servicios, precios, horario y datos de contacto."
+        },
+        "publish": {
+          "title": "Publica tu web",
+          "text": "Tu web se publica en su propia dirección, con tus colores y tu contenido."
+        },
+        "manage": {
+          "title": "Gestiónala desde tu panel",
+          "text": "Confirma citas, lee mensajes y actualiza tu web cuando lo necesites."
+        }
+      }
+    },
+    "features": {
+      "title": "Todo lo que necesita un negocio local",
+      "items": {
+        "booking": {
+          "title": "Citas online",
+          "text": "Tus clientes eligen servicio, día y una hora libre. Sin llamadas y sin reservas duplicadas."
+        },
+        "staff": {
+          "title": "Tu equipo",
+          "text": "Añade empleados con sus propios servicios y horarios para que los clientes elijan con quién reservar."
+        },
+        "messages": {
+          "title": "Formulario de contacto",
+          "text": "Los mensajes enviados desde tu web llegan directamente a tu panel."
+        },
+        "languages": {
+          "title": "En el idioma de tus clientes",
+          "text": "Elige el idioma en el que se muestra tu web."
+        },
+        "design": {
+          "title": "Pensada para tu sector",
+          "text": "Paletas de colores y servicios de ejemplo adaptados a tu tipo de negocio."
+        },
+        "hosting": {
+          "title": "Alojamiento incluido",
+          "text": "Alojamos y mantenemos tu web con una cuota inicial única y una suscripción mensual sencilla."
+        }
+      }
+    },
+    "cta": {
+      "title": "Crea tu web hoy",
+      "text": "Solo lleva unos minutos. Tu progreso se guarda, así que puedes volver cuando quieras.",
+      "button": "Crea tu web"
+    },
+    "footer": "© {year} Localy",
+    "intro": {
+      "text": "Una web tan cuidada como tu negocio, con citas, tu equipo y tus mensajes en un solo lugar."
+    },
+    "showcase": {
+      "title": "Hecha para negocios como el tuyo",
+      "text": "Diseños y sugerencias adaptados a cada sector, desde clínicas y talleres hasta tiendas y estudios.",
+      "captions": {
+        "jewelry": "Joyería",
+        "veterinary": "Clínica veterinaria",
+        "florist": "Floristería",
+        "barbershop": "Barbería"
+      }
+    },
+    "images": {
+      "jewelry": "Manos con anillos y pulseras sobre una superficie oscura",
+      "veterinary": "Una veterinaria sosteniendo un gato en la clínica",
+      "florist": "Un ramo de lirios y rosas blancas",
+      "barbershop": "Un sillón de barbero antiguo de cuero"
+    }
+  },
+  "Preview": {
+    "label": "Vista previa",
+    "namePlaceholder": "Tu negocio",
+    "descriptionPlaceholder": "Aquí aparecerá tu descripción.",
+    "nav": {
+      "services": "Servicios",
+      "hours": "Horario",
+      "contact": "Contacto"
+    },
+    "cta": {
+      "BOOKINGS": "Reservar cita",
+      "CONTACT": "Contáctanos",
+      "SHOWCASE": "Ver nuestro trabajo"
+    },
+    "services": "Servicios",
+    "noServices": "Aquí aparecerán tus servicios.",
+    "duration": "{minutes} min"
   },
   "auth": {
     "APP": "Aplicación",
