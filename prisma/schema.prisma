@@ -6,3 +6,140 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum BusinessType {
+  HAIR_SALON
+  BARBERSHOP
+  AUTO_REPAIR
+  BEAUTY_CENTER
+  CLINIC
+  VETERINARY
+  RESTAURANT
+  GYM
+  OTHER
+}
+
+enum AppointmentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+// Mirrors Stripe's subscription.status values.
+enum SubscriptionStatus {
+  INCOMPLETE         @map("incomplete")
+  INCOMPLETE_EXPIRED @map("incomplete_expired")
+  TRIALING           @map("trialing")
+  ACTIVE             @map("active")
+  PAST_DUE           @map("past_due")
+  CANCELED           @map("canceled")
+  UNPAID             @map("unpaid")
+  PAUSED             @map("paused")
+}
+
+model Business {
+  id             String       @id @default(cuid())
+  // References neon_auth.user.id; no FK because that schema is managed by Neon Auth. Ownership is checked in /lib.
+  userId         String       @db.Uuid
+  type           BusinessType
+  slug           String?      @unique
+  name           String
+  description    String?
+  primaryColor   String?
+  secondaryColor String?
+  phone          String?
+  email          String?
+  address        String?
+  logoUrl        String?
+  imageUrls      String[]
+  // IANA zone (e.g. "America/New_York"), detected from the owner's device in the questionnaire.
+  timezone       String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+
+  services     Service[]
+  openingHours OpeningHours[]
+  appointments Appointment[]
+  messages     Message[]
+  subscription Subscription?
+
+  @@index([userId])
+}
+
+model Service {
+  id              String   @id @default(cuid())
+  businessId      String
+  name            String
+  description     String?
+  priceCents      Int
+  durationMinutes Int
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  business     Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  appointments Appointment[]
+
+  @@index([businessId])
+}
+
+// One row per open interval, so split shifts (e.g. 09:00-14:00 and 16:00-20:00) are two rows.
+model OpeningHours {
+  id          String @id @default(cuid())
+  businessId  String
+  dayOfWeek   Int // 0 = Sunday … 6 = Saturday
+  openMinute  Int // minutes since local midnight
+  closeMinute Int
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, dayOfWeek])
+}
+
+model Appointment {
+  id            String            @id @default(cuid())
+  businessId    String
+  serviceId     String
+  startsAt      DateTime
+  endsAt        DateTime
+  status        AppointmentStatus @default(PENDING)
+  customerName  String
+  customerEmail String
+  customerPhone String?
+  notes         String?
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  service  Service  @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+
+  @@index([businessId, startsAt])
+}
+
+model Message {
+  id         String    @id @default(cuid())
+  businessId String
+  name       String
+  email      String
+  phone      String?
+  body       String
+  readAt     DateTime?
+  createdAt  DateTime  @default(now())
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+
+  @@index([businessId, createdAt])
+}
+
+model Subscription {
+  id                   String             @id @default(cuid())
+  businessId           String             @unique
+  stripeCustomerId     String             @unique
+  stripeSubscriptionId String             @unique
+  status               SubscriptionStatus
+  currentPeriodEnd     DateTime?
+  cancelAtPeriodEnd    Boolean            @default(false)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}

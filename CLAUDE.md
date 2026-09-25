@@ -8,6 +8,11 @@ SaaS multi-tenant donde negocios locales crean su web con un cuestionario, pagan
 - Next.js (App Router) + TypeScript estricto, Tailwind CSS
 - PostgreSQL en Neon + Prisma 7 (driver adapter obligatorio, cliente generado en `lib/generated/prisma`, config en `prisma.config.ts`; migraciones con `DATABASE_URL_UNPOOLED`)
 - Neon Auth (Better Auth gestionado; usuarios en el esquema `neon_auth`), configurado en `neon.ts` y aplicado con `neon deploy`
+  - Servidor: `lib/auth/server.ts` (`auth.getSession()`); cliente: `lib/auth/client.ts`; `requireUser()` en `lib/auth/session.ts`.
+  - No hay modelo `User` en Prisma: las tablas propias guardan `userId` (UUID indexado, sin FK) y la propiedad se comprueba en `/lib`.
+  - Rol de plataforma: `session.user.role` (`"user"` / `"admin"`, plugin admin). No duplicarlo en Prisma.
+  - Plugins y proveedores se configuran en Neon (Console / `neon neon-auth`), no pasando `plugins` al SDK.
+- Desarrollo contra la rama Neon `development` (`neon checkout`); nunca migrar `production` desde local.
 - Stripe (Checkout setup + suscripción, webhooks, Customer Portal), Zod
 - Consultar la documentación oficial actual de cada herramienta antes de usar una API; no asumir de memoria. Para Next.js, leer `node_modules/next/dist/docs/`.
 
@@ -30,7 +35,10 @@ SaaS multi-tenant donde negocios locales crean su web con un cuestionario, pagan
 - La sección de variables de entorno debe estar sincronizada con `.env.example`.
 
 ## Fuera de alcance (no construir salvo petición)
-Dominios propios por cliente, editor visual drag-and-drop, multi-idioma, app móvil, varias plantillas por tipo de negocio.
+Dominios propios por cliente, editor visual drag-and-drop, app móvil, varias plantillas por tipo de negocio.
+
+## Idiomas
+Multi-idioma en alcance: inglés por defecto, más español, con selector para toda la UI de la plataforma (cuestionario, panel y pantallas de acceso). Añadir un idioma debe consistir solo en añadir un archivo de traducciones.
 
 ## Comandos
 - `npm run dev` / `npm run build` / `npm run lint` / `npm run typecheck`
