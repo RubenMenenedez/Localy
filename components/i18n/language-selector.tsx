@@ -4,11 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
 import { setLocale } from "@/lib/i18n/actions";
 import { locales } from "@/lib/i18n/config";
-
-function nativeName(locale: string) {
-  const name = new Intl.DisplayNames([locale], { type: "language" }).of(locale) ?? locale;
-  return name.charAt(0).toLocaleUpperCase(locale) + name.slice(1);
-}
+import { nativeLanguageName } from "@/lib/i18n/native-name";
 
 export function LanguageSelector() {
   const t = useTranslations("LanguageSelector");
@@ -29,7 +25,7 @@ export function LanguageSelector() {
       >
         {locales.map((code) => (
           <option key={code} value={code}>
-            {nativeName(code)}
+            {nativeLanguageName(code)}
           </option>
         ))}
       </select>

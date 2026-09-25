@@ -9,7 +9,7 @@ Formato: `- [ ] Qué se necesita — para qué sirve — fase — quién lo hace
 - [x] Migración inicial `20260925112807_init` aplicada en `development` — modelo de datos — Fase 1 — Claude
 - [x] Migraciones `remove_timezone_default` y `add_business_language` aplicadas en `development` — modelo de datos — Fase 1 — Claude
 - [ ] Aplicar migraciones en `production` con `prisma migrate deploy` al desplegar — base de datos de producción — Fase 1 — yo / Claude
-- [ ] Modelo de empleados (`Staff`, servicios y horario por empleado, `Appointment.staffId`) — reservas por empleado — Fase 1 (pendiente de confirmar cuándo migrar) — Claude
+- [x] Migración `staff_and_business_draft` (`Staff`, `StaffService`, `StaffWorkingHours`, `Appointment.staffId` obligatorio, `Business.status`) aplicada en `development` — reservas por empleado y borradores — Fase 2 — Claude
 - [ ] Tabla de invitaciones de empleados (token con hash, email, caducidad) — vincular cuenta a un empleado — Fase 7 — Claude
 - [ ] Revisar la retención de historial / restauración en el plan de Neon — recuperación ante pérdida de datos — Fase 0 — yo
 - [x] Revocar la API key `3364328` creada por `neon mcp` — seguridad (acceso a toda la cuenta) — Fase 0 — Claude
@@ -21,9 +21,12 @@ Formato: `- [ ] Qué se necesita — para qué sirve — fase — quién lo hace
 - [ ] Revisar email/contraseña y Google en la rama `production` — producción — Fase 1 — yo / Claude
 - [ ] Añadir el dominio principal como trusted domain (`neon neon-auth domain add https://…`) — redirecciones de auth en producción — Fase 1 — yo / Claude
 - [ ] Hacer admin a tu usuario (Console → Auth → Users → ⋯ → Make admin) en cada rama — área `/admin` futura — Fase 1 — yo
-- [x] Mantener activado el plugin Organization de Neon Auth (decisión del usuario; se evaluó para empleados) — Fase 1 — yo
+- [x] Plugin Organization de Neon Auth desactivado en `development` y `production` (`neon neon-auth config organization update --enabled=false --branch <rama>`) — no se usa; empleados con tablas propias — Fase 2 — Claude
+- [ ] Revisar el tema de la UI de acceso: sigue el modo oscuro del sistema mientras el resto de la plataforma es claro — coherencia visual — Fase 2 — Claude (Fase 8)
 
 ## Almacenamiento
+- [ ] Elegir y configurar almacenamiento de archivos (p. ej. Neon Object Storage, Vercel Blob o S3/R2) — subida de logotipo e imágenes; el paso del cuestionario existe pero no sube nada aún — Fase 2 — yo (cuenta) / Claude (integración)
+- [ ] Variables de entorno del almacenamiento en `.env.example` — acceso al bucket — Fase 2 — Claude
 
 ## Hosting y dominios
 - [x] Instalar Git — control de versiones y skills de Neon — Fase 0 — yo
@@ -57,7 +60,12 @@ Formato: `- [ ] Qué se necesita — para qué sirve — fase — quién lo hace
 - Nombres de idioma en el selector con `Intl.DisplayNames` (sin lista de nombres que mantener).
 - `zod` 4.3.6 como dependencia directa — la misma versión que ya usa `@neondatabase/auth`, sin duplicados.
 - `@neon/env` eliminado (sin uso); `@neon/config` como devDependency (solo lo usa `neon.ts`).
-- Empleados (RECOMENDACIÓN, pendiente de confirmar): tablas propias (`Staff`, invitaciones) en lugar del plugin Organization — una sola fuente de verdad en nuestra BD, empleados sin cuenta, permisos testeables; el plugin sigue activado sin usarse.
+- Empleados con tablas propias (`Staff`, invitaciones en Fase 7) en lugar del plugin Organization — una sola fuente de verdad en nuestra BD, empleados sin cuenta, permisos testeables. Confirmado por el usuario.
+- Al crear un negocio se crea una ficha `Staff` del dueño (todos los servicios, horario = horario del negocio); todas las citas tienen `staffId`. Siempre debe quedar al menos un `Staff` activo.
+- `Business.status` solo tiene `DRAFT` por ahora; los estados de publicación se añaden en la Fase 5.
+- Precios sin moneda por ahora (el cuestionario pide un número); la moneda se decide con Stripe en la Fase 4.
+- Paletas y servicios de ejemplo por tipo en `lib/business-types.ts`; las secciones por tipo se definirán con la plantilla (Fase 3).
+- Vitest 5.0.2 (dev) para tests de lógica crítica; `@types/node` subido a ^24 (runtime Node 24; lo exige Vitest 5).
 - Borrador del cuestionario en el navegador hasta el registro; al registrarse se guarda en BD (`Business.userId` siempre obligatorio).
 - Un usuario puede tener varios negocios (`userId` indexado, no único).
 - `npm audit` reporta 4 vulnerabilidades altas en dependencias internas del CLI `prisma` (`mysql2`, `deepmerge-ts`), que `@prisma/client` arrastra como peer; la app no las ejecuta y la "solución" automática baja a Prisma 6. Revisar al actualizar Prisma.

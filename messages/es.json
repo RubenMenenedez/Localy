@@ -3,14 +3,177 @@
     "title": "Localy"
   },
   "HomePage": {
-    "title": "Localy"
+    "title": "Localy",
+    "start": "Crea tu web"
   },
   "LanguageSelector": {
     "label": "Idioma"
   },
   "Dashboard": {
     "signedInAs": "Sesión iniciada como {email}",
-    "signOut": "Cerrar sesión"
+    "signOut": "Cerrar sesión",
+    "businesses": "Tus negocios",
+    "noBusinesses": "Todavía no tienes ningún negocio.",
+    "createBusiness": "Crear un negocio nuevo",
+    "status": {
+      "DRAFT": "Borrador"
+    }
+  },
+  "Questionnaire": {
+    "progress": "Paso {current} de {total}",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "finish": "Terminar",
+    "steps": {
+      "type": {
+        "title": "¿Qué tipo de negocio tienes?",
+        "description": "Te sugeriremos colores y servicios adecuados."
+      },
+      "colors": {
+        "title": "Elige tus colores",
+        "description": "Elige una paleta sugerida o tus propios colores.",
+        "custom": "Colores personalizados",
+        "primary": "Color principal",
+        "secondary": "Color secundario",
+        "palette": "Paleta {primary} y {secondary}"
+      },
+      "name": {
+        "title": "¿Cómo se llama tu negocio?",
+        "description": "Este nombre aparecerá en tu web.",
+        "label": "Nombre del negocio"
+      },
+      "description": {
+        "title": "Describe tu negocio",
+        "description": "Cuenta a tus visitantes a qué te dedicas y qué te hace especial.",
+        "label": "Descripción"
+      },
+      "language": {
+        "title": "Idioma de la web",
+        "description": "El idioma que verán tus clientes en tu web."
+      },
+      "services": {
+        "title": "Tus servicios",
+        "description": "Añade los servicios que tus clientes pueden reservar, con su precio y duración.",
+        "name": "Servicio",
+        "price": "Precio",
+        "duration": "Duración (minutos)",
+        "add": "Añadir servicio",
+        "remove": "Quitar"
+      },
+      "hours": {
+        "title": "Horario de apertura",
+        "description": "Añade uno o varios turnos por día. Los días sin turnos quedan cerrados.",
+        "addShift": "Añadir turno",
+        "closed": "Cerrado",
+        "opens": "Abre a las",
+        "closes": "Cierra a las",
+        "remove": "Quitar"
+      },
+      "contact": {
+        "title": "Datos de contacto",
+        "description": "Cómo pueden contactarte tus clientes.",
+        "email": "Correo electrónico",
+        "phone": "Teléfono (opcional)",
+        "address": "Dirección (opcional)"
+      },
+      "images": {
+        "title": "Logotipo e imágenes",
+        "description": "Añade tu logotipo y fotos de tu negocio.",
+        "comingSoon": "Pronto podrás subir tu logotipo e imágenes. De momento puedes continuar."
+      }
+    },
+    "complete": {
+      "saving": "Guardando tu negocio…",
+      "failed": "No hemos podido guardar tu negocio. Revisa el cuestionario e inténtalo de nuevo.",
+      "backToQuestionnaire": "Volver al cuestionario"
+    },
+    "errors": {
+      "required": "Este campo es obligatorio.",
+      "tooLong": "Este texto es demasiado largo.",
+      "invalid": "Este valor no es válido.",
+      "invalidColor": "Elige un color válido.",
+      "invalidPrice": "Introduce un precio válido.",
+      "invalidDuration": "Introduce una duración entre 5 y 480 minutos.",
+      "closeBeforeOpen": "La hora de cierre debe ser posterior a la de apertura.",
+      "hoursRequired": "Añade al menos un turno.",
+      "hoursOverlap": "Los turnos de un mismo día no pueden solaparse.",
+      "servicesRequired": "Añade al menos un servicio.",
+      "invalidEmail": "Introduce un correo electrónico válido.",
+      "invalidTimezone": "No hemos podido detectar tu zona horaria."
+    }
+  },
+  "BusinessTypes": {
+    "HAIR_SALON": {
+      "name": "Peluquería",
+      "services": {
+        "haircut": "Corte de pelo",
+        "coloring": "Tinte",
+        "blowDry": "Secado y peinado"
+      }
+    },
+    "BARBERSHOP": {
+      "name": "Barbería",
+      "services": {
+        "haircut": "Corte de pelo",
+        "beardTrim": "Arreglo de barba",
+        "haircutAndBeard": "Corte y barba"
+      }
+    },
+    "AUTO_REPAIR": {
+      "name": "Taller mecánico",
+      "services": {
+        "oilChange": "Cambio de aceite",
+        "inspection": "Revisión del vehículo",
+        "tireChange": "Cambio de neumáticos"
+      }
+    },
+    "BEAUTY_CENTER": {
+      "name": "Centro de estética",
+      "services": {
+        "facial": "Tratamiento facial",
+        "manicure": "Manicura",
+        "waxing": "Depilación"
+      }
+    },
+    "CLINIC": {
+      "name": "Clínica",
+      "services": {
+        "consultation": "Consulta",
+        "followUp": "Revisión",
+        "checkup": "Chequeo completo"
+      }
+    },
+    "VETERINARY": {
+      "name": "Clínica veterinaria",
+      "services": {
+        "consultation": "Consulta",
+        "vaccination": "Vacunación",
+        "grooming": "Peluquería canina"
+      }
+    },
+    "RESTAURANT": {
+      "name": "Restaurante",
+      "services": {
+        "tableForTwo": "Mesa para dos",
+        "tableForFour": "Mesa para cuatro",
+        "tastingMenu": "Menú degustación"
+      }
+    },
+    "GYM": {
+      "name": "Gimnasio",
+      "services": {
+        "personalTraining": "Entrenamiento personal",
+        "trialClass": "Clase de prueba",
+        "nutritionConsultation": "Consulta de nutrición"
+      }
+    },
+    "OTHER": {
+      "name": "Otro",
+      "services": {
+        "consultation": "Consulta",
+        "standardService": "Servicio estándar"
+      }
+    }
   },
   "auth": {
     "APP": "Aplicación",

@@ -47,8 +47,7 @@ Dominios propios por cliente, editor visual drag-and-drop, app móvil, varias pl
 - Server components: `getTranslations`; client components: `useTranslations`.
 
 ## Fases
-0. Proyecto base ✅ · 1. Modelo de datos y autenticación ✅
-2. Tipo de negocio y cuestionario por pasos (borrador en el navegador hasta el registro; zona horaria detectada del dispositivo; idioma de la web). Vitest.
+0. Proyecto base ✅ · 1. Modelo de datos y autenticación ✅ · 2. Tipo de negocio y cuestionario ✅
 3. Plantilla pública única + vista previa en vivo.
 4. Stripe (setup + suscripción, webhooks activar/suspender/reactivar).
 5. Subdominios y publicación.
@@ -60,8 +59,15 @@ Dominios propios por cliente, editor visual drag-and-drop, app móvil, varias pl
 8. Emails de confirmación, SEO básico, páginas legales y pulido.
 
 ## Permisos por negocio
-- Dueño = `Business.userId`. Empleado = `Staff.userId` (cuando exista el modelo `Staff`). Toda consulta a datos de un negocio se filtra por uno de los dos roles en `/lib`, nunca solo en la UI.
+- Dueño = `Business.userId`. Empleado = `Staff.userId`. Toda consulta a datos de un negocio se filtra por uno de los dos roles en `/lib`, nunca solo en la UI.
+- El dueño/propietario nunca se toma de la entrada del cliente, siempre de la sesión (`requireUser()`).
+- Un negocio siempre conserva al menos un `Staff` activo (al crear el negocio se crea la ficha del dueño; comprobarlo al desactivar/eliminar empleados).
+
+## Cuestionario
+- Borrador en `localStorage` (`lib/questionnaire/draft-storage.ts`) con la forma `PartialBusinessDraft`; la vista previa de la Fase 3 debe leer esa misma forma.
+- Esquemas Zod por paso en `lib/questionnaire/schema.ts`; los mensajes de error de Zod son claves de `Questionnaire.errors`.
+- Al terminar: `/start/complete` (protegida) llama a `submitDraft`, que crea negocio + servicios + horario + ficha de empleado del dueño en una transacción (`lib/business/create.ts`).
 
 ## Comandos
-- `npm run dev` / `npm run build` / `npm run lint` / `npm run typecheck`
+- `npm run dev` / `npm run build` / `npm run lint` / `npm run typecheck` / `npm test` (Vitest)
 - `npx prisma migrate dev` para crear/aplicar migraciones; `npx prisma generate` regenera el cliente (también en `postinstall`).

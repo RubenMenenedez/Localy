@@ -19,6 +19,10 @@ enum BusinessType {
   OTHER
 }
 
+enum BusinessStatus {
+  DRAFT
+}
+
 enum AppointmentStatus {
   PENDING
   CONFIRMED
@@ -38,17 +42,18 @@ enum SubscriptionStatus {
 }
 
 model Business {
-  id             String       @id @default(cuid())
+  id             String         @id @default(cuid())
   // References neon_auth.user.id; no FK because that schema is managed by Neon Auth. Ownership is checked in /lib.
-  userId         String       @db.Uuid
+  userId         String         @db.Uuid
   type           BusinessType
-  slug           String?      @unique
+  status         BusinessStatus @default(DRAFT)
+  slug           String?        @unique
   name           String
-  description    String?
-  primaryColor   String?
-  secondaryColor String?
+  description    String
+  primaryColor   String
+  secondaryColor String
   phone          String?
-  email          String?
+  email          String
   address        String?
   logoUrl        String?
   imageUrls      String[]
@@ -56,16 +61,61 @@ model Business {
   timezone       String
   // Public website language, chosen by the owner; one of the locales in lib/i18n/config.ts.
   language       String
-  createdAt      DateTime     @default(now())
-  updatedAt      DateTime     @updatedAt
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 
   services     Service[]
   openingHours OpeningHours[]
+  staff        Staff[]
   appointments Appointment[]
   messages     Message[]
   subscription Subscription?
 
   @@index([userId])
+}
+
+// A bookable person. A business must always keep at least one active staff member (enforced in /lib).
+model Staff {
+  id         String   @id @default(cuid())
+  businessId String
+  name       String
+  // Optional linked account (neon_auth.user.id); staff can exist without one.
+  userId     String?  @db.Uuid
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  business     Business            @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  services     StaffService[]
+  workingHours StaffWorkingHours[]
+  appointments Appointment[]
+
+  @@index([businessId])
+  @@index([userId])
+}
+
+model StaffService {
+  staffId   String
+  serviceId String
+
+  staff   Staff   @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@id([staffId, serviceId])
+  @@index([serviceId])
+}
+
+// Same shape as OpeningHours; bookable time is the intersection of both.
+model StaffWorkingHours {
+  id          String @id @default(cuid())
+  staffId     String
+  dayOfWeek   Int
+  openMinute  Int
+  closeMinute Int
+
+  staff Staff @relation(fields: [staffId], references: [id], onDelete: Cascade)
+
+  @@index([staffId, dayOfWeek])
 }
 
 model Service {
@@ -78,7 +128,8 @@ model Service {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  business     Business      @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  business     Business       @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  staff        StaffService[]
   appointments Appointment[]
 
   @@index([businessId])
@@ -101,6 +152,7 @@ model Appointment {
   id            String            @id @default(cuid())
   businessId    String
   serviceId     String
+  staffId       String
   startsAt      DateTime
   endsAt        DateTime
   status        AppointmentStatus @default(PENDING)
@@ -113,8 +165,10 @@ model Appointment {
 
   business Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
   service  Service  @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  staff    Staff    @relation(fields: [staffId], references: [id], onDelete: Restrict)
 
   @@index([businessId, startsAt])
+  @@index([staffId, startsAt])
 }
 
 model Message {

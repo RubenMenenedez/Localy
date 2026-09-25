@@ -3,14 +3,177 @@
     "title": "Localy"
   },
   "HomePage": {
-    "title": "Localy"
+    "title": "Localy",
+    "start": "Create your website"
   },
   "LanguageSelector": {
     "label": "Language"
   },
   "Dashboard": {
     "signedInAs": "Signed in as {email}",
-    "signOut": "Sign out"
+    "signOut": "Sign out",
+    "businesses": "Your businesses",
+    "noBusinesses": "You don't have any businesses yet.",
+    "createBusiness": "Create a new business",
+    "status": {
+      "DRAFT": "Draft"
+    }
+  },
+  "Questionnaire": {
+    "progress": "Step {current} of {total}",
+    "back": "Back",
+    "next": "Next",
+    "finish": "Finish",
+    "steps": {
+      "type": {
+        "title": "What kind of business do you have?",
+        "description": "We'll suggest colors and services that fit it."
+      },
+      "colors": {
+        "title": "Choose your colors",
+        "description": "Pick a suggested palette or choose your own colors.",
+        "custom": "Custom colors",
+        "primary": "Main color",
+        "secondary": "Secondary color",
+        "palette": "Palette {primary} and {secondary}"
+      },
+      "name": {
+        "title": "What's your business called?",
+        "description": "This name will appear on your website.",
+        "label": "Business name"
+      },
+      "description": {
+        "title": "Describe your business",
+        "description": "Tell visitors what you do and what makes you special.",
+        "label": "Description"
+      },
+      "language": {
+        "title": "Website language",
+        "description": "The language your customers will see on your website."
+      },
+      "services": {
+        "title": "Your services",
+        "description": "Add the services customers can book, with their price and duration.",
+        "name": "Service",
+        "price": "Price",
+        "duration": "Duration (minutes)",
+        "add": "Add service",
+        "remove": "Remove"
+      },
+      "hours": {
+        "title": "Opening hours",
+        "description": "Add one or more shifts per day. Days without shifts are closed.",
+        "addShift": "Add shift",
+        "closed": "Closed",
+        "opens": "Opens at",
+        "closes": "Closes at",
+        "remove": "Remove"
+      },
+      "contact": {
+        "title": "Contact details",
+        "description": "How customers can reach you.",
+        "email": "Email",
+        "phone": "Phone (optional)",
+        "address": "Address (optional)"
+      },
+      "images": {
+        "title": "Logo and images",
+        "description": "Add your logo and photos of your business.",
+        "comingSoon": "Uploading a logo and images will be available soon. You can continue for now."
+      }
+    },
+    "complete": {
+      "saving": "Saving your business…",
+      "failed": "We couldn't save your business. Please review the questionnaire and try again.",
+      "backToQuestionnaire": "Back to the questionnaire"
+    },
+    "errors": {
+      "required": "This field is required.",
+      "tooLong": "This text is too long.",
+      "invalid": "This value is not valid.",
+      "invalidColor": "Choose a valid color.",
+      "invalidPrice": "Enter a valid price.",
+      "invalidDuration": "Enter a duration between 5 and 480 minutes.",
+      "closeBeforeOpen": "The closing time must be after the opening time.",
+      "hoursRequired": "Add at least one shift.",
+      "hoursOverlap": "Shifts on the same day can't overlap.",
+      "servicesRequired": "Add at least one service.",
+      "invalidEmail": "Enter a valid email address.",
+      "invalidTimezone": "We couldn't detect your time zone."
+    }
+  },
+  "BusinessTypes": {
+    "HAIR_SALON": {
+      "name": "Hair salon",
+      "services": {
+        "haircut": "Haircut",
+        "coloring": "Hair coloring",
+        "blowDry": "Blow-dry"
+      }
+    },
+    "BARBERSHOP": {
+      "name": "Barbershop",
+      "services": {
+        "haircut": "Haircut",
+        "beardTrim": "Beard trim",
+        "haircutAndBeard": "Haircut and beard"
+      }
+    },
+    "AUTO_REPAIR": {
+      "name": "Auto repair shop",
+      "services": {
+        "oilChange": "Oil change",
+        "inspection": "Vehicle inspection",
+        "tireChange": "Tire change"
+      }
+    },
+    "BEAUTY_CENTER": {
+      "name": "Beauty center",
+      "services": {
+        "facial": "Facial treatment",
+        "manicure": "Manicure",
+        "waxing": "Waxing"
+      }
+    },
+    "CLINIC": {
+      "name": "Clinic",
+      "services": {
+        "consultation": "Consultation",
+        "followUp": "Follow-up visit",
+        "checkup": "Full check-up"
+      }
+    },
+    "VETERINARY": {
+      "name": "Veterinary clinic",
+      "services": {
+        "consultation": "Consultation",
+        "vaccination": "Vaccination",
+        "grooming": "Grooming"
+      }
+    },
+    "RESTAURANT": {
+      "name": "Restaurant",
+      "services": {
+        "tableForTwo": "Table for two",
+        "tableForFour": "Table for four",
+        "tastingMenu": "Tasting menu"
+      }
+    },
+    "GYM": {
+      "name": "Gym",
+      "services": {
+        "personalTraining": "Personal training",
+        "trialClass": "Trial class",
+        "nutritionConsultation": "Nutrition consultation"
+      }
+    },
+    "OTHER": {
+      "name": "Other",
+      "services": {
+        "consultation": "Consultation",
+        "standardService": "Standard service"
+      }
+    }
   },
   "auth": {
     "APP": "App",
