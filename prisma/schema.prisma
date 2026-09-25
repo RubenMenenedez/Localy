@@ -54,6 +54,8 @@ model Business {
   imageUrls      String[]
   // IANA zone (e.g. "America/New_York"), detected from the owner's device in the questionnaire.
   timezone       String
+  // Public website language, chosen by the owner; one of the locales in lib/i18n/config.ts.
+  language       String
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
 

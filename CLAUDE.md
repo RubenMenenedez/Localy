@@ -37,8 +37,30 @@ SaaS multi-tenant donde negocios locales crean su web con un cuestionario, pagan
 ## Fuera de alcance (no construir salvo petición)
 Dominios propios por cliente, editor visual drag-and-drop, app móvil, varias plantillas por tipo de negocio.
 
-## Idiomas
-Multi-idioma en alcance: inglés por defecto, más español, con selector para toda la UI de la plataforma (cuestionario, panel y pantallas de acceso). Añadir un idioma debe consistir solo en añadir un archivo de traducciones.
+## Idiomas (next-intl)
+- **Todo texto visible para el usuario pasa por next-intl; nunca texto hardcodeado** en componentes, páginas, metadata, errores mostrados ni emails. Esto incluye nombres de marca y placeholders.
+- Inglés por defecto (`en`) y español (`es`). Mensajes en `messages/<locale>.json`; `messages/en.json` es la referencia de tipos (`global.d.ts`).
+- Añadir un idioma: crear `messages/<code>.json` con las mismas claves que `en.json` y añadir el código a `locales` en `lib/i18n/config.ts`.
+- UI de la plataforma (cuestionario, panel, acceso): idioma de la cookie `locale` (sin prefijos en la URL), cambiado con `LanguageSelector` → acción `setLocale`. Config en `lib/i18n/request.ts`.
+- Textos de la UI de Neon Auth: namespace `auth` de cada archivo de mensajes, pasado como `localization` en `AuthProvider`.
+- Web pública de cada negocio: idioma de `Business.language` (elegido por el dueño); la cookie del visitante no lo cambia.
+- Server components: `getTranslations`; client components: `useTranslations`.
+
+## Fases
+0. Proyecto base ✅ · 1. Modelo de datos y autenticación ✅
+2. Tipo de negocio y cuestionario por pasos (borrador en el navegador hasta el registro; zona horaria detectada del dispositivo; idioma de la web). Vitest.
+3. Plantilla pública única + vista previa en vivo.
+4. Stripe (setup + suscripción, webhooks activar/suspender/reactivar).
+5. Subdominios y publicación.
+6. Reserva de citas en la web pública y formulario de contacto.
+   - Empleados: el cliente elige un empleado o "cualquiera disponible"; los huecos se calculan por empleado (horario del empleado ∩ horario del negocio, servicios que ofrece, citas existentes). Con "cualquiera", se asigna un empleado libre al reservar.
+7. Panel del negocio (citas, mensajes, edición de la web, suscripción).
+   - Empleados: el dueño crea empleados reservables (nombre, servicios, horario) sin necesidad de invitarlos, y opcionalmente los invita por email para vincular una cuenta.
+   - Permisos: el dueño (`Business.userId`) ve todas las citas y es el único que edita web, precios y facturación; un empleado con cuenta (`Staff.userId`) solo ve y gestiona sus propias citas.
+8. Emails de confirmación, SEO básico, páginas legales y pulido.
+
+## Permisos por negocio
+- Dueño = `Business.userId`. Empleado = `Staff.userId` (cuando exista el modelo `Staff`). Toda consulta a datos de un negocio se filtra por uno de los dos roles en `/lib`, nunca solo en la UI.
 
 ## Comandos
 - `npm run dev` / `npm run build` / `npm run lint` / `npm run typecheck`

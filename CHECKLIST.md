@@ -7,7 +7,10 @@ Formato: `- [ ] Qué se necesita — para qué sirve — fase — quién lo hace
 - [x] Neon Auth activado (`neon.ts` con `auth: true`, `neon deploy`) — autenticación gestionada (Better Auth) — Fase 0 — Claude
 - [x] Rama Neon `development` creada y `.env` apuntando a ella — no desarrollar ni migrar contra `production` — Fase 0 — Claude
 - [x] Migración inicial `20260925112807_init` aplicada en `development` — modelo de datos — Fase 1 — Claude
+- [x] Migraciones `remove_timezone_default` y `add_business_language` aplicadas en `development` — modelo de datos — Fase 1 — Claude
 - [ ] Aplicar migraciones en `production` con `prisma migrate deploy` al desplegar — base de datos de producción — Fase 1 — yo / Claude
+- [ ] Modelo de empleados (`Staff`, servicios y horario por empleado, `Appointment.staffId`) — reservas por empleado — Fase 1 (pendiente de confirmar cuándo migrar) — Claude
+- [ ] Tabla de invitaciones de empleados (token con hash, email, caducidad) — vincular cuenta a un empleado — Fase 7 — Claude
 - [ ] Revisar la retención de historial / restauración en el plan de Neon — recuperación ante pérdida de datos — Fase 0 — yo
 - [x] Revocar la API key `3364328` creada por `neon mcp` — seguridad (acceso a toda la cuenta) — Fase 0 — Claude
 - [ ] Quitar la entrada del MCP de Neon de `~/.claude.json`, Copilot CLI y VS Code (ya no funciona sin la key) — limpieza — Fase 1 — yo
@@ -18,7 +21,7 @@ Formato: `- [ ] Qué se necesita — para qué sirve — fase — quién lo hace
 - [ ] Revisar email/contraseña y Google en la rama `production` — producción — Fase 1 — yo / Claude
 - [ ] Añadir el dominio principal como trusted domain (`neon neon-auth domain add https://…`) — redirecciones de auth en producción — Fase 1 — yo / Claude
 - [ ] Hacer admin a tu usuario (Console → Auth → Users → ⋯ → Make admin) en cada rama — área `/admin` futura — Fase 1 — yo
-- [ ] Desactivar el plugin Organization en Neon Auth si no se va a usar (está activado por defecto) — reducir superficie — Fase 1 — yo / Claude
+- [x] Mantener activado el plugin Organization de Neon Auth (decisión del usuario; se evaluó para empleados) — Fase 1 — yo
 
 ## Almacenamiento
 
@@ -30,6 +33,8 @@ Formato: `- [ ] Qué se necesita — para qué sirve — fase — quién lo hace
 
 ## Email
 - [ ] SMTP propio en Neon Auth (verificación y reset de contraseña); el SMTP compartido de Neon es solo para desarrollo — emails de auth en producción — Fase 1 — yo
+- [ ] Proveedor de email transaccional para la app (p. ej. Resend) — invitaciones de empleados (Fase 7) y confirmaciones de citas (Fase 8); se adelanta a la Fase 7 — Fase 1 — yo (cuenta) / Claude (integración)
+- [ ] Traducir todos los emails de la app vía next-intl (idioma del destinatario: dueño/empleado por su preferencia, cliente por `Business.language`) — Fase 1 — Claude
 
 ## Variables de entorno
 - [x] `DATABASE_URL` — conexión pooled de la app a Neon — Fase 0 — Claude (vía `neon env pull`)
@@ -48,7 +53,11 @@ Formato: `- [ ] Qué se necesita — para qué sirve — fase — quién lo hace
 - Cliente Prisma generado en `lib/generated/prisma` (ignorado en git, se regenera en `postinstall`).
 - `dotenv` como dependencia — Prisma 7 no carga `.env` por sí solo en `prisma.config.ts`.
 - npm como gestor de paquetes — el que viene con Node, sin herramientas extra.
-- Multi-idioma en alcance (inglés por defecto + español); enfoque i18n pendiente de decisión. `lang="es"` del layout provisional hasta entonces.
+- i18n con `next-intl` 4.14.7, sin prefijos de idioma en la URL: idioma de la plataforma en la cookie `locale` (por defecto `en`), no interfiere con el enrutado por subdominio de `proxy.ts`. Web pública en `Business.language`.
+- Nombres de idioma en el selector con `Intl.DisplayNames` (sin lista de nombres que mantener).
+- `zod` 4.3.6 como dependencia directa — la misma versión que ya usa `@neondatabase/auth`, sin duplicados.
+- `@neon/env` eliminado (sin uso); `@neon/config` como devDependency (solo lo usa `neon.ts`).
+- Empleados (RECOMENDACIÓN, pendiente de confirmar): tablas propias (`Staff`, invitaciones) en lugar del plugin Organization — una sola fuente de verdad en nuestra BD, empleados sin cuenta, permisos testeables; el plugin sigue activado sin usarse.
 - Borrador del cuestionario en el navegador hasta el registro; al registrarse se guarda en BD (`Business.userId` siempre obligatorio).
 - Un usuario puede tener varios negocios (`userId` indexado, no único).
 - `npm audit` reporta 4 vulnerabilidades altas en dependencias internas del CLI `prisma` (`mysql2`, `deepmerge-ts`), que `@prisma/client` arrastra como peer; la app no las ejecuta y la "solución" automática baja a Prisma 6. Revisar al actualizar Prisma.
@@ -56,5 +65,6 @@ Formato: `- [ ] Qué se necesita — para qué sirve — fase — quién lo hace
 - Usuarios en `neon_auth.user` (gestionado por Neon); no hay modelo `User` en Prisma. `Business.userId` es un UUID indexado sin FK; la propiedad se comprueba en `/lib`.
 - Rol de plataforma = `neon_auth.user.role` (`user` / `admin`) del plugin admin — una sola fuente de verdad; sin columna de rol duplicada en Prisma.
 - UI de auth prediseñada de `@neondatabase/auth/react/ui` (incluida en el SDK, sin dependencia extra); el provider solo envuelve `/auth`, no las webs públicas.
+- `Business.language` obligatorio, sin valor por defecto, validado en código contra `locales` (sin enum en BD, para añadir idiomas sin migrar).
 - Precios en céntimos (`priceCents`), horarios en minutos desde medianoche local y `Business.timezone` (IANA, obligatorio, sin valor por defecto; se detecta del dispositivo en el cuestionario y el dueño puede cambiarlo) para calcular huecos.
 - Estados de suscripción: enum que refleja `subscription.status` de Stripe.
